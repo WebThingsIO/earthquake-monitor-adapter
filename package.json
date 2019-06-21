@@ -1,7 +1,7 @@
 {
   "name": "earthquake-monitor-adapter",
   "display_name": "Earthquake Monitor",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Earthquake monitor for Mozilla WebThings Gateway",
   "author": "Mozilla IoT",
   "main": "main.py",
