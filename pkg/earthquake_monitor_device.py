@@ -68,7 +68,7 @@ class EarthquakeMonitorDevice(Device):
             'distance',
             {
                 'label': 'Distance',
-                'type': 'number',
+                'type': 'integer',
                 'unit': 'kilometer',
                 'readOnly': True,
             },
@@ -126,7 +126,7 @@ class EarthquakeMonitorDevice(Device):
             if delta < datetime.timedelta(minutes=self.active_interval):
                 self.properties['earthquake'].update(True)
                 self.properties['magnitude'].update(latest.magnitude)
-                self.properties['distance'].update(latest.distance_to_home)
+                self.properties['distance'].update(round(latest.distance_to_home))
                 self.properties['time'].update(str(latest.time).split('.')[0])
                 self.properties['place'].update(latest.place)
             else:
