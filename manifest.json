@@ -1,46 +1,21 @@
 {
-  "name": "earthquake-monitor-adapter",
-  "display_name": "Earthquake Monitor",
-  "version": "0.2.0",
-  "description": "Earthquake monitor for Mozilla WebThings Gateway",
   "author": "Mozilla IoT",
-  "main": "main.py",
-  "keywords": [
-    "mozilla",
-    "iot",
-    "adapter",
-    "earthquake",
-    "usgs"
-  ],
-  "homepage": "https://github.com/mozilla-iot/earthquake-monitor-adapter",
+  "description": "Earthquake monitor for Mozilla WebThings Gateway",
+  "gateway_specific_settings": {
+    "webthings": {
+      "exec": "python3 {path}/main.py",
+      "primary_type": "adapter",
+      "strict_max_version": "*",
+      "strict_min_version": "0.10.0"
+    }
+  },
+  "homepage_url": "https://github.com/mozilla-iot/earthquake-monitor-adapter",
+  "id": "earthquake-monitor-adapter",
   "license": "MPL-2.0",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/mozilla-iot/earthquake-monitor-adapter.git"
-  },
-  "bugs": {
-    "url": "https://github.com/mozilla-iot/earthquake-monitor-adapter/issues"
-  },
-  "files": [
-    "LICENSE",
-    "README.md",
-    "SHA256SUMS",
-    "lib",
-    "main.py",
-    "manifest.json",
-    "pkg/__init__.py",
-    "pkg/earthquake_monitor_adapter.py",
-    "pkg/earthquake_monitor_device.py",
-    "pkg/earthquake_monitor_property.py"
-  ],
-  "moziot": {
-    "api": {
-      "min": 2,
-      "max": 2
-    },
-    "plugin": true,
-    "exec": "python3 {path}/main.py",
-    "config": {
+  "manifest_version": 1,
+  "name": "Earthquake Monitor",
+  "options": {
+    "default": {
       "locations": []
     },
     "schema": {
@@ -50,7 +25,6 @@
       ],
       "properties": {
         "locations": {
-          "type": "array",
           "description": "List of locations",
           "items": {
             "type": "object",
@@ -77,33 +51,36 @@
                 "type": "number"
               },
               "radius": {
+                "default": 500,
                 "description": "Radius in kilometers around center for which to include events",
-                "type": "number",
                 "minimum": 1,
-                "default": 500
+                "type": "number"
               },
               "magnitude": {
+                "default": 1.0,
                 "description": "Minimum magnitude of events to include",
-                "type": "number",
                 "minimum": 1.0,
-                "default": 1.0
+                "type": "number"
               },
               "pollInterval": {
-                "type": "integer",
-                "minimum": 30,
+                "default": 60,
                 "description": "Interval in seconds at which to poll the USGS for changes",
-                "default": 60
+                "minimum": 30,
+                "type": "integer"
               },
               "activeInterval": {
-                "type": "integer",
-                "minimum": 1,
+                "default": 5,
                 "description": "Interval in minutes for which the sensor value should stay active after an earthquake is detected",
-                "default": 5
+                "minimum": 1,
+                "type": "integer"
               }
             }
-          }
+          },
+          "type": "array"
         }
       }
     }
-  }
+  },
+  "short_name": "Earthquake",
+  "version": "0.2.0"
 }

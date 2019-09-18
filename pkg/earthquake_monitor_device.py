@@ -1,6 +1,7 @@
 """Earthquake monitor adapter for Mozilla WebThings Gateway."""
 
 from gateway_addon import Device
+from geojson_client import UPDATE_ERROR, UPDATE_OK
 from geojson_client.usgs_earthquake_hazards_program_feed import (
     UsgsEarthquakeHazardsProgramFeed
 )
@@ -111,29 +112,34 @@ class EarthquakeMonitorDevice(Device):
         )
 
         while True:
-            _, entries = feed.update()
+            status, entries = feed.update()
 
-            if not entries:
-                continue
+            if status == UPDATE_OK and len(entries) > 0:
+                self.connected_notify(True)
+                latest = entries[0]
 
-            latest = entries[0]
+                now = datetime.datetime.utcnow().replace(
+                    tzinfo=datetime.timezone.utc
+                )
+                delta = now - latest.time
 
-            now = datetime.datetime.utcnow().replace(
-                tzinfo=datetime.timezone.utc
-            )
-            delta = now - latest.time
-
-            if delta < datetime.timedelta(minutes=self.active_interval):
-                self.properties['earthquake'].update(True)
-                self.properties['magnitude'].update(latest.magnitude)
-                self.properties['distance'].update(round(latest.distance_to_home))
-                self.properties['time'].update(str(latest.time).split('.')[0])
-                self.properties['place'].update(latest.place)
-            else:
-                self.properties['earthquake'].update(False)
-                self.properties['magnitude'].update(0)
-                self.properties['distance'].update(0)
-                self.properties['time'].update('')
-                self.properties['place'].update('')
+                if delta < datetime.timedelta(minutes=self.active_interval):
+                    self.properties['earthquake'].update(True)
+                    self.properties['magnitude'].update(latest.magnitude)
+                    self.properties['distance'].update(
+                        round(latest.distance_to_home)
+                    )
+                    self.properties['time'].update(
+                        str(latest.time).split('.')[0]
+                    )
+                    self.properties['place'].update(latest.place)
+                else:
+                    self.properties['earthquake'].update(False)
+                    self.properties['magnitude'].update(0)
+                    self.properties['distance'].update(0)
+                    self.properties['time'].update('')
+                    self.properties['place'].update('')
+            elif status == UPDATE_ERROR:
+                self.connected_notify(False)
 
             time.sleep(self.poll_interval)
