@@ -98,6 +98,14 @@ class EarthquakeMonitorDevice(Device):
             ''
         )
 
+        self.links = [
+            {
+                'rel': 'alternate',
+                'mediaType': 'text/html',
+                'href': 'https://earthquake.usgs.gov/earthquakes/map/',
+            },
+        ]
+
         t = threading.Thread(target=self.poll)
         t.daemon = True
         t.start()
