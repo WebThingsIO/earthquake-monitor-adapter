@@ -46,7 +46,7 @@ class EarthquakeMonitorDevice(Device):
             'earthquake',
             {
                 '@type': 'BooleanProperty',
-                'label': 'Earthquake',
+                'title': 'Earthquake',
                 'type': 'boolean',
                 'readOnly': True,
             },
@@ -57,7 +57,7 @@ class EarthquakeMonitorDevice(Device):
             self,
             'magnitude',
             {
-                'label': 'Magnitude',
+                'title': 'Magnitude',
                 'type': 'number',
                 'readOnly': True,
             },
@@ -68,7 +68,7 @@ class EarthquakeMonitorDevice(Device):
             self,
             'distance',
             {
-                'label': 'Distance',
+                'title': 'Distance',
                 'type': 'integer',
                 'unit': 'kilometer',
                 'readOnly': True,
@@ -80,7 +80,7 @@ class EarthquakeMonitorDevice(Device):
             self,
             'time',
             {
-                'label': 'Time (UTC)',
+                'title': 'Time (UTC)',
                 'type': 'string',
                 'readOnly': True,
             },
@@ -91,7 +91,7 @@ class EarthquakeMonitorDevice(Device):
             self,
             'place',
             {
-                'label': 'Place',
+                'title': 'Place',
                 'type': 'string',
                 'readOnly': True,
             },
