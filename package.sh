@@ -9,7 +9,7 @@ rm -rf *.tgz package SHA256SUMS lib
 mkdir lib package
 
 # Pull down Python dependencies
-pip3 install -r requirements.txt -t lib --no-binary geojson-client --prefix ""
+pip3 install -r requirements.txt -t lib --no-binary :all: --prefix ""
 
 # Put package together
 cp -r lib pkg LICENSE manifest.json *.py README.md package/
