@@ -1,6 +1,6 @@
 {
-  "author": "Mozilla IoT",
-  "description": "Earthquake monitor for Mozilla WebThings Gateway",
+  "author": "WebThingsIO",
+  "description": "Earthquake monitor for WebThings Gateway",
   "gateway_specific_settings": {
     "webthings": {
       "exec": "python3 {path}/main.py",
@@ -9,7 +9,7 @@
       "strict_min_version": "0.10.0"
     }
   },
-  "homepage_url": "https://github.com/mozilla-iot/earthquake-monitor-adapter",
+  "homepage_url": "https://github.com/WebThingsIO/earthquake-monitor-adapter",
   "id": "earthquake-monitor-adapter",
   "license": "MPL-2.0",
   "manifest_version": 1,
@@ -82,5 +82,5 @@
     }
   },
   "short_name": "Earthquake",
-  "version": "0.3.1"
+  "version": "0.3.2"
 }

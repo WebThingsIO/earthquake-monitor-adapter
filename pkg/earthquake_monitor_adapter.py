@@ -1,4 +1,4 @@
-"""Earthquake monitor adapter for Mozilla WebThings Gateway."""
+"""Earthquake monitor adapter for WebThings Gateway."""
 
 from gateway_addon import Adapter, Database
 import hashlib
